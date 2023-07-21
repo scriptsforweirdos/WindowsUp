@@ -1,0 +1,4 @@
+defusedxml==0.7.1
+python_dateutil==2.8.2
+Requests==2.31.0
+win10toast==0.9
