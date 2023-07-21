@@ -13,7 +13,11 @@ import defusedxml.ElementTree as ET
 from win10toast import ToastNotifier
 
 
-def parseXML(path, savepath):
+def parseXML(path, savepath, lTemp, hTemp, lDew, hDew):
+    params = [lTemp, hTemp, lDew, hDew]
+    if not any(isinstance(x, int) for x in params):
+        print("Please provide integers for Temps and Dew Points")
+        return False
     lastData = json.load(open(savepath),)
     print("Previous Update: " + str(lastData["Time"]))
     print("Last window Status: " + str(lastData["windows"]))
@@ -38,7 +42,7 @@ def parseXML(path, savepath):
     print("Most Recent Update: " + str(parsedTime))
     print("Current Temp: " + str(currentTemp))
     print("Current Dew Point: " + str(currentDewPoint))
-    if 65 < int(currentTemp) < 71 and int(currentDewPoint) <= 60:
+    if int(lTemp) <= int(currentTemp) <= int(hTemp) and int(lDew) <= int(currentDewPoint) <= int(hDew):
         windowStatus = "Open"
     else:
         windowStatus = "Close"
@@ -64,4 +68,4 @@ if __name__ == "__main__":
     lowDew = 0
     highDew = 60
     savePath = "../lastdata.txt"
-    parseXML(xmlpath, savePath)
+    parseXML(xmlpath, savePath, lowTemp, highTemp, lowDew, highDew)
