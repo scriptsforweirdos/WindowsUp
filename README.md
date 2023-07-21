@@ -1,6 +1,8 @@
-# WeatherAlert: Windows Up
+# Windows Up
 
 Python Script for Windows 10+.
+
+![Windows Notification Panel Showing WindowsUp Alert](preview.png "Notification Sample")
 
 ## Purpose
 
